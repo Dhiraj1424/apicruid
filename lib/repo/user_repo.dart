@@ -27,4 +27,30 @@ catch (e){
   throw e;
 }
   }
+
+
+
+ Future<Map> SendUser(String name,job)async{
+    List<UserModel>mylist=[];
+
+
+try{
+    final response = await http.post(Uri.parse('https://reqres.in/api/users'),
+body:{
+  'name':name,
+  'job':job
+});
+  if(response.statusCode==201){
+    Map data=json.decode(response.body);
+    return data;
+  }
+  else {
+        print(response.reasonPhrase);
+        return {"error": "Something went wrong"};
+      }
+}
+ catch (e){
+  throw e;
+}
+  } 
 }

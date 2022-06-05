@@ -66,15 +66,41 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.deepOrange,
               ),
             ),
-              FloatingActionButton(
-              
-              child: const Text('Create'), onPressed: ()async{
-              Map data=  await UserRepo().SendUser(name.text, job.text);
+            SizedBox(height: 10,),
+              GestureDetector(
+                onTap:  ()async{
+                Map data=  await UserRepo().UpdateUser(name.text, job.text);
              setState(() {
-               response=data;
+                 response=data;
              });
-              }),
-              Text(response.toString()),
+                },
+                child: Container(
+                  color: Colors.deepOrange,
+                  width: double.infinity,
+                  height: 30,
+                  child: Center(child: Text('Update')),
+                ),
+              ),
+
+SizedBox(height: 10,),
+
+
+              GestureDetector(
+                onTap:  ()async{
+                Map data=  await UserRepo().DeleteUser();
+             setState(() {
+                 response=data;
+             });
+                },
+                child: Container(
+                  color: Colors.deepOrange,
+                  width: double.infinity,
+                  height: 30,
+                  child: Center(child: Text('Delete')),
+                ),
+              ),
+
+              Container(child: Text(response.toString())),
               
             ],
           ),
